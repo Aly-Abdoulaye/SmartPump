@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Ceci est le sidebar</h1>
+    <h2>SIDEBA 2</h2>
 </body>
 </html>
