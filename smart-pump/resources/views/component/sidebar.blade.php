@@ -36,7 +36,7 @@
                     <div class=" py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestion des stations</h6>
                         <a class="collapse-item" href="#">Ajouter stations</a>
-                        <a class="collapse-item" href="#">Tous les stations</a>
+                        <a class="collapse-item" href="{{ route('stations.index') }}">Tous les stations</a>
                     </div>
                 </div>
             </li>

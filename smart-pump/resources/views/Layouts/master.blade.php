@@ -24,15 +24,13 @@
             <div id="content-wrapper" class="d-flex flex-column">
                     <div id="content">
                         <!-- Le navbar -->
-                    @include('component.navbar')
-                    <!-- Le main content  -->
-                    <div class="container-fluid">
-                        <!-- les graphiques du dashboard -->
-                        @include('component.dashboardmain')
+                        @include('component.navbar')
+                        <div class="container-fluid">
+                            @yield('content')
+                        </div>  
+                       
                     </div>
-                    </div>
-
-                 @include('component.footer')
+                    @include('component.footer')
             </div>            
 </div>
  <!-- bouton pour deplacer le sidebar -->
