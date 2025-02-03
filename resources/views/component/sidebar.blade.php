@@ -78,7 +78,7 @@
             </li>
             <!-- Nav Item - Client -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#"  data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{ route('clients.index') }}"  data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <img src="img/icons/poignee-de-main.png" alt="">
                     <span>Clients</span>

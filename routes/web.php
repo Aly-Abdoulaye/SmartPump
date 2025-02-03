@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 Use App\Http\controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 
 
 /*
@@ -35,4 +36,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Auth::routes(['reset' => true]);
+
+Route::resource('clients', ClientController::class);
 

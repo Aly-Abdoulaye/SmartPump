@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Définir la longueur par défaut des chaînes de caractères
         Schema::defaultStringLength(191);
+        //Pagination 
+        Paginator::useBootstrap();
     }
 }

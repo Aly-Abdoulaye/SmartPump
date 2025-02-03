@@ -9,6 +9,8 @@ class BonDachat extends Model
 {
     use HasFactory;
 
+    protected $table = 'bons_dachat';
+
     protected $fillable = ['client_id', 'montant', 'date_emission', 'date_expiration', 'statut', 'code_bon'];
 
     public function client()
