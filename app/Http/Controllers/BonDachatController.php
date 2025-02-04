@@ -5,51 +5,64 @@ namespace App\Http\Controllers;
 use App\Models\BonDachat;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BonDachatController extends Controller
 {
     public function index()
     {
-        return BonDachat::with('client')->get();
+        $bons = BonDachat::with('client')->paginate(10);
+        return view('bons.index', compact('bons'));
+    }
+
+    public function create(Request $request)
+    {
+        $clients = Client::all();
+        return view('bons.create', compact('clients'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'client_id' => 'required|exists:clients,id',
-            'montant' => 'required|numeric',
+            'montant' => 'required|numeric|min:1',
             'date_emission' => 'required|date',
-            'date_expiration' => 'required|date',
-            'statut' => 'required|in:valide,utilise,expire',
-            'code_bon' => 'required|string|unique:bons_dachat',
+            'date_expiration' => 'required|date|after:date_emission',
+            'statut' => 'required|in:valide,utilisé,expiré',
         ]);
 
-        return BonDachat::create($validated);
+        // Générer un code bon unique
+        $validated['code_bon'] = strtoupper(Str::random(4)); // Exemple : "AB12"
+
+        BonDachat::create($validated);
+        return redirect()->route('bons.index')->with('success', 'Bon ajouté avec succès.');
     }
 
-    public function show(BonDachat $bonDachat)
+    public function show(BonDachat $bon)
     {
-        return $bonDachat->load('client');
+        return view('bons.show', compact('bon'));
     }
 
-    public function update(Request $request, BonDachat $bonDachat)
+    public function edit(BonDachat $bon)
+    {
+        return view('bons.edit', compact('bon'));
+    }
+
+    public function update(Request $request, BonDachat $bon)
     {
         $validated = $request->validate([
-            'client_id' => 'sometimes|exists:clients,id',
-            'montant' => 'sometimes|numeric',
-            'date_emission' => 'sometimes|date',
-            'date_expiration' => 'sometimes|date',
-            'statut' => 'sometimes|in:valide,utilise,expire',
-            'code_bon' => 'sometimes|string|unique:bons_dachat,code_bon,' . $bonDachat->id,
+            'montant' => 'required|numeric|min:1',
+            'date_expiration' => 'required|date|after:date_emission',
+            'statut' => 'required|in:valide,utilisé,expiré',
         ]);
 
-        $bonDachat->update($validated);
-        return $bonDachat;
+        $bon->update($validated);
+        return redirect()->route('bons.index')->with('success', 'Bon mis à jour.');
     }
 
-    public function destroy(BonDachat $bonDachat)
+    public function destroy(BonDachat $bon)
     {
-        $bonDachat->delete();
-        return response()->noContent();
+        $bon->delete();
+        return redirect()->route('bons.index')->with('success', 'Bon supprimé.');
     }
 }

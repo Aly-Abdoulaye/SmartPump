@@ -13,8 +13,9 @@ class Client extends Model
 
     public function bonsDachat()
     {
-        return $this->hasMany(BonDachat::class);
+        return $this->hasMany(BonDachat::class, 'client_id');
     }
+
 
     public function factures()
     {

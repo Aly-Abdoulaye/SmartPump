@@ -39,3 +39,7 @@ Auth::routes(['reset' => true]);
 
 Route::resource('clients', ClientController::class);
 
+
+use App\Http\Controllers\BonDachatController;
+
+Route::resource('bons', BonDachatController::class);
