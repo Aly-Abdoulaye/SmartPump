@@ -4,7 +4,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <img src="img/Logo.png" alt="Logo" id="Logo" style="width: 227px; height: 66px; margin: 20px;">
+                <img src="{{ asset('img/Logo.png') }}" alt="Logo" id="Logo" style="width: 227px; height: 66px; margin: 20px;">
             </a>
 
             <!-- Divider -->
@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('Dashboard.index') }}"  data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/grid-4.png" alt="">
+                    <img src="{{ asset('img/icons/grid-4.png') }}" alt="">
                     <span>Tableau de bord </span>
                 </a>
             </li>
@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <img src="img/icons/gas-station (2) 1.png" alt="">
+                    <img src="{{ asset('img/icons/gas-station (2) 1.png') }}" alt="">
                     <span>Stations</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -46,7 +46,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <img src="img/icons/users.png" alt="">
+                    <img src="{{ asset('img/icons/users.png') }}" alt="">
                     <span>Utilisateurs</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -62,7 +62,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCarburant"
                 aria-expanded="true" aria-controls="collapseCarburant">
-                    <img src="img/icons/station 1.png" alt=""> 
+                    <img src="{{ asset('img/icons/station 1.png') }}" alt=""> 
                     <span>Carburants</span></a>
                 
                 
@@ -72,24 +72,33 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#"  data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/parcelle.png" alt="">
+                    <img src="{{ asset('img/icons/parcelle.png') }}" alt="">
                     <span>Fournisseurs</span>
                 </a>
             </li>
             <!-- Nav Item - Client -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('clients.index') }}"  data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/poignee-de-main.png" alt="">
+                <a class="nav-link collapsed" href="#"  data-toggle="collapse" data-target="#collapsePages1"
+                    aria-expanded="true" aria-controls="collapsePages1">
+                    <img src="{{ asset('img/icons/poignee-de-main.png') }}" alt="">
                     <span>Clients</span>
                 </a>
+                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class=" py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestion des clients</h6>
+                        <a class="collapse-item" href="{{ route('clients.create') }}">Ajouter un client</a>
+                        <a class="collapse-item" href="{{ route('clients.index') }}">Listes de clients</a>
+                        <a class="collapse-item" href="{{ route('bons.index') }}">Bons d'achat</a>
+                        <a class="collapse-item" href="{{ route('factures.generate') }}">Factures</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item -Historiques -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#"  data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/archiver (1).png" alt="">
+                    <img src="{{ asset('img/icons/archiver (1).png') }}" alt="">
                     <span>Historiques </span>
                 </a>
             </li>
@@ -97,14 +106,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#"data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/report 1.png" alt="">
+                    <img src="{{ asset('img/icons/report 1.png') }}" alt="">
                     <span>Rapports</span></a>
             </li>
             <!-- Paramètre -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                    <img src="img/icons/settings.png" alt="">
+                    <img src="{{ asset('img/icons/settings.png') }}" alt="">
                     <span>Paramètre</span></a>
             </li>
 
