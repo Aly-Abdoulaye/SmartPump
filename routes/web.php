@@ -43,3 +43,10 @@ Route::resource('clients', ClientController::class);
 use App\Http\Controllers\BonDachatController;
 
 Route::resource('bons', BonDachatController::class);
+
+use App\Http\Controllers\FactureController;
+
+// Route::resource('factures', FactureController::class);
+Route::get('factures/generate', [FactureController::class, 'showGenerateForm'])->name('factures.showGenerateForm');
+Route::post('factures/generate', [FactureController::class, 'generate'])->name('factures.generate');
+Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name('factures.pdf');

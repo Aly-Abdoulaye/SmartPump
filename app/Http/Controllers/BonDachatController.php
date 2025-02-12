@@ -32,7 +32,7 @@ class BonDachatController extends Controller
         ]);
 
         // Générer un code bon unique
-        $validated['code_bon'] = strtoupper(Str::random(4)); // Exemple : "AB12"
+        $validated['code_bon'] = strtoupper(Str::random(6)); // Exemple : "AB12CD"
 
         BonDachat::create($validated);
         return redirect()->route('bons.index')->with('success', 'Bon ajouté avec succès.');

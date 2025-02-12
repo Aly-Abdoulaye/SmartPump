@@ -34,7 +34,7 @@
                 <a href="{{ route('bons.edit', $bon) }}" class="btn btn-warning btn-sm">Modifier</a>
                 <form action="{{ route('bons.destroy', $bon) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ce bon ?')">Supprimer</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bon ?')">Supprimer</button>
                 </form>
             </td>
         </tr>
