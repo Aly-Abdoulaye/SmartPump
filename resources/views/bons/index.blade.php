@@ -14,8 +14,9 @@
     <thead>
         <tr>
             <th>Client</th>
+            <th>Type Carburant</th>
+            <th>Quantité (L)</th>
             <th>Montant</th>
-            <th>Code Bon</th>
             <th>Date Expiration</th>
             <th>Statut</th>
             <th>Actions</th>
@@ -25,10 +26,12 @@
         @foreach($bons as $bon)
         <tr>
             <td>{{ $bon->client->nom }}</td>
+            <td>{{ optional($bon->carburant)->nom ?? 'Non défini' }}</td>
+            <td>{{ number_format($bon->quantite, 2) }}</td>
             <td>{{ number_format($bon->montant, 2) }} €</td>
-            <td>{{ $bon->code_bon }}</td>
             <td>{{ $bon->date_expiration }}</td>
             <td>{{ ucfirst($bon->statut) }}</td>
+            
             <td>
                 <a href="{{ route('bons.show', $bon) }}" class="btn btn-info btn-sm">Détails</a>
                 <a href="{{ route('bons.edit', $bon) }}" class="btn btn-warning btn-sm">Modifier</a>
@@ -37,6 +40,7 @@
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bon ?')">Supprimer</button>
                 </form>
             </td>
+
         </tr>
         @endforeach
     </tbody>

@@ -17,9 +17,38 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Montant</label>
-            <input type="number" name="montant" class="form-control" required>
+    <label class="form-label">Type de Carburant</label>
+    <select name="carburant_id" class="form-control" required>
+        @foreach($carburants as $carburant)
+            <option value="{{ $carburant->id }}" data-prix="{{ $carburant->prix_unitaire }}">
+                {{ $carburant->nom }} ({{ number_format($carburant->prix_unitaire, 2) }} €/L)
+            </option>
+        @endforeach
+    </select>
+</div>
+
+        <div class="mb-3">
+            <label class="form-label">Quantité (en litres)</label>
+            <input type="number" name="quantite" class="form-control" step="0.01" required oninput="calculerMontant()">
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Montant Total</label>
+            <input type="text" id="montant" class="form-control" readonly>
+        </div>
+
+        <script>
+            function calculerMontant() {
+                let selectCarburant = document.querySelector('select[name="carburant_id"]');
+                let prixUnitaire = selectCarburant.options[selectCarburant.selectedIndex].getAttribute('data-prix');
+                let quantite = document.querySelector('input[name="quantite"]').value;
+                let montant = prixUnitaire * quantite;
+                document.getElementById('montant').value = montant.toFixed(2) + ' €';
+            }
+
+            document.querySelector('select[name="carburant_id"]').addEventListener('change', calculerMontant);
+        </script>
+
 
         <div class="mb-3">
             <label class="form-label">Date d'émission</label>

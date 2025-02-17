@@ -27,7 +27,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Générer la Facture</button>
-        <a href="{{ route('factures.index') }}" class="btn btn-secondary">Annuler</a>
+        <a href="#" class="btn btn-secondary">Annuler</a>
     </form>
 </div>
 @endsection

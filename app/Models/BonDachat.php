@@ -11,7 +11,22 @@ class BonDachat extends Model
 
     protected $table = 'bons_dachat';
 
-    protected $fillable = ['client_id', 'montant', 'date_emission', 'date_expiration', 'statut', 'code_bon'];
+    protected $fillable = [
+        'client_id',
+        'montant',
+        'date_emission',
+        'date_expiration',
+        'statut',
+        'code_bon',
+        'carburant_id',
+        'quantite',
+    ];
+    
+    public function carburant()
+    {
+        return $this->belongsTo(Carburant::class, 'carburant_id');
+    }
+    
 
     public function client()
     {

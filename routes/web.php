@@ -50,3 +50,7 @@ use App\Http\Controllers\FactureController;
 Route::get('factures/generate', [FactureController::class, 'showGenerateForm'])->name('factures.showGenerateForm');
 Route::post('factures/generate', [FactureController::class, 'generate'])->name('factures.generate');
 Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name('factures.pdf');
+
+Route::get('factures/{id}/preview', [FactureController::class, 'preview'])->name('factures.preview');
+Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name('factures.downloadPDF');
+

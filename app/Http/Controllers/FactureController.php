@@ -85,17 +85,17 @@ public function generate(Request $request)
     ]);
 
     $client = Client::findOrFail($request->client_id);
-    
-    // Récupérer les bo$bons du client sur la période
+
+    // Sélectionner les bons d'achat du client dans la période
     $bons = BonDachat::where('client_id', $client->id)
-                 ->whereBetween('date_emission', [$request->date_debut, $request->date_fin])
-                 ->get();
+                     ->whereBetween('date_emission', [$request->date_debut, $request->date_fin])
+                     ->get();
 
     if ($bons->isEmpty()) {
-        return redirect()->back()->with('error', 'Aucune transaction trouvée pour cette période.');
+        return redirect()->back()->with('error', 'Aucun bon trouvé pour cette période.');
     }
 
-    // Calcul du montant total
+    // Calcul du montant total des bons
     $montant_total = $bons->sum('montant');
 
     // Générer un numéro de facture unique
@@ -108,11 +108,13 @@ public function generate(Request $request)
         'date_emission' => now(),
         'statut' => 'impaye',
         'numero_facture' => $numero_facture,
-        'periode' => $request->date_debut . ' - ' . $request->date_fin, // Ajout de la période
-    ]);    
+        'periode' => $request->date_debut . ' - ' . $request->date_fin,
+    ]);
 
-    return $this->generatePDF($facture->id);
+    // Rediriger vers l'aperçu au lieu de télécharger directement
+    return redirect()->route('factures.preview', $facture->id);
 }
+
 
 public function generatePDF($facture_id)
 {
@@ -122,6 +124,19 @@ public function generatePDF($facture_id)
 
     return $pdf->download("Facture_{$facture->numero_facture}.pdf");
 }
+
+public function preview($facture_id)
+{
+    $facture = Facture::with(['client', 'client.bonsDachat'])->findOrFail($facture_id);
+
+    // Générer le PDF
+    $pdf = Pdf::loadView('factures.pdf', compact('facture'));
+
+    // Afficher le PDF dans le navigateur au lieu de le télécharger
+    return $pdf->stream("Facture_{$facture->numero_facture}.pdf");
+}
+
+
 
 
 }

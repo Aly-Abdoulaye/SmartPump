@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facture</title>
     <style>
         body { font-family: Arial, sans-serif; }
@@ -19,29 +18,27 @@
         <div class="header">
             <h2>Facture #{{ $facture->numero_facture }}</h2>
             <p>Date : {{ $facture->date_emission }}</p>
+            <p>Période : {{ $facture->periode }}</p>
         </div>
 
         <p><strong>Client :</strong> {{ $facture->client->nom }}</p>
 
-            <table class="details">
-        <thead>
-            <tr>
-                <th>Code Bon</th>
-                <th>Montant</th>
-                <th>Date Emission</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($facture->client->bonsDachat as $bon)
-            <tr>
-                <td>{{ $bon->code_bon }}</td>
-                <td>{{ number_format($bon->montant, 2) }} €</td>
-                <td>{{ $bon->date_emission }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+        <table class="details">
+            <thead>
+                <tr>
+                    <th>Code Bon</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($facture->client->bonsDachat as $bon)
+                <tr>
+                    <td>{{ $bon->code_bon }}</td>
+                    <td>{{ number_format($bon->montant, 2) }} €</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
         <table class="total">
             <tr>

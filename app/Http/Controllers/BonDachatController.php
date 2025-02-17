@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BonDachat;
 use App\Models\Client;
+use App\Models\Carburant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,28 +16,34 @@ class BonDachatController extends Controller
         return view('bons.index', compact('bons'));
     }
 
-    public function create(Request $request)
-    {
-        $clients = Client::all();
-        return view('bons.create', compact('clients'));
-    }
+    public function create()
+{
+    $clients = Client::all();
+    $carburants = Carburant::all(); // Récupérer les types de carburant
+    return view('bons.create', compact('clients', 'carburants'));
+}
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'montant' => 'required|numeric|min:1',
-            'date_emission' => 'required|date',
-            'date_expiration' => 'required|date|after:date_emission',
-            'statut' => 'required|in:valide,utilisé,expiré',
-        ]);
 
-        // Générer un code bon unique
-        $validated['code_bon'] = strtoupper(Str::random(6)); // Exemple : "AB12CD"
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'client_id' => 'required|exists:clients,id',
+        'date_emission' => 'required|date',
+        'date_expiration' => 'required|date|after:date_emission',
+        'statut' => 'required|in:valide,utilisé,expiré',
+        'carburant_id' => 'required|exists:carburants,id',
+        'quantite' => 'required|numeric|min:0.01',
+    ]);
 
-        BonDachat::create($validated);
-        return redirect()->route('bons.index')->with('success', 'Bon ajouté avec succès.');
-    }
+    $carburant = Carburant::findOrFail($request->carburant_id);
+
+    $validated['code_bon'] = strtoupper(Str::random(6));
+    $validated['montant'] = $carburant->prix_unitaire * $request->quantite; // Calcul du montant
+
+    BonDachat::create($validated);
+    return redirect()->route('bons.index')->with('success', 'Bon ajouté avec succès.');
+}
+
 
     public function show(BonDachat $bon)
     {
