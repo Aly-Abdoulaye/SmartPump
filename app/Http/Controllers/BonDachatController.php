@@ -52,20 +52,30 @@ public function store(Request $request)
 
     public function edit(BonDachat $bon)
     {
-        return view('bons.edit', compact('bon'));
+        $clients = Client::all();
+        $carburants = Carburant::all();
+        return view('bons.edit', compact('bon', 'clients', 'carburants'));
     }
+
 
     public function update(Request $request, BonDachat $bon)
-    {
-        $validated = $request->validate([
-            'montant' => 'required|numeric|min:1',
-            'date_expiration' => 'required|date|after:date_emission',
-            'statut' => 'required|in:valide,utilisé,expiré',
-        ]);
+{
+    $validated = $request->validate([
+        'client_id' => 'required|exists:clients,id',
+        'date_emission' => 'required|date',
+        'date_expiration' => 'required|date|after:date_emission',
+        'statut' => 'required|in:valide,utilisé,expiré',
+        'carburant_id' => 'required|exists:carburants,id',
+        'quantite' => 'required|numeric|min:0.01',
+    ]);
 
-        $bon->update($validated);
-        return redirect()->route('bons.index')->with('success', 'Bon mis à jour.');
-    }
+    $carburant = Carburant::findOrFail($request->carburant_id);
+    $validated['montant'] = $carburant->prix_unitaire * $request->quantite; // Recalcul du montant
+
+    $bon->update($validated);
+
+    return redirect()->route('bons.index')->with('success', 'Bon mis à jour avec succès.');
+}
 
     public function destroy(BonDachat $bon)
     {

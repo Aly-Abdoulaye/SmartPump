@@ -27,8 +27,8 @@
         <tr>
             <td>{{ $bon->client->nom }}</td>
             <td>{{ optional($bon->carburant)->nom ?? 'Non défini' }}</td>
-            <td>{{ number_format($bon->quantite, 2) }}</td>
-            <td>{{ number_format($bon->montant, 2) }} €</td>
+            <td>{{ number_format($bon->quantite, 0) }}</td>
+            <td>{{ number_format($bon->montant, 0, ',', ' ') }} CFA</td>
             <td>{{ $bon->date_expiration }}</td>
             <td>{{ ucfirst($bon->statut) }}</td>
             

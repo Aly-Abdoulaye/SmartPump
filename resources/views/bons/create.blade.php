@@ -21,7 +21,7 @@
     <select name="carburant_id" class="form-control" required>
         @foreach($carburants as $carburant)
             <option value="{{ $carburant->id }}" data-prix="{{ $carburant->prix_unitaire }}">
-                {{ $carburant->nom }} ({{ number_format($carburant->prix_unitaire, 2) }} €/L)
+                {{ $carburant->nom }} ({{ number_format($carburant->prix_unitaire, 0, ',', ' ') }} CFA/L)
             </option>
         @endforeach
     </select>
@@ -43,7 +43,7 @@
                 let prixUnitaire = selectCarburant.options[selectCarburant.selectedIndex].getAttribute('data-prix');
                 let quantite = document.querySelector('input[name="quantite"]').value;
                 let montant = prixUnitaire * quantite;
-                document.getElementById('montant').value = montant.toFixed(2) + ' €';
+                document.getElementById('montant').value = montant.toFixed(2) + ' CFA';
             }
 
             document.querySelector('select[name="carburant_id"]').addEventListener('change', calculerMontant);
