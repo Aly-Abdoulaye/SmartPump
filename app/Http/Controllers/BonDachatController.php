@@ -6,6 +6,7 @@ use App\Models\BonDachat;
 use App\Models\Client;
 use App\Models\Carburant;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 
 class BonDachatController extends Controller
@@ -50,6 +51,7 @@ public function store(Request $request)
         return view('bons.show', compact('bon'));
     }
 
+
     public function edit(BonDachat $bon)
     {
         $clients = Client::all();
@@ -82,4 +84,14 @@ public function store(Request $request)
         $bon->delete();
         return redirect()->route('bons.index')->with('success', 'Bon supprimé.');
     }
+
+public function generatePDF($bon_id)
+{
+    $bon = BonDachat::with(['client', 'carburant'])->findOrFail($bon_id);
+
+    $pdf = PDF::loadView('bons.receipt', compact('bon'));
+
+    return $pdf->download("Recu_Bon_{$bon->code_bon}.pdf");
+}
+
 }

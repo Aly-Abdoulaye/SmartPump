@@ -54,3 +54,8 @@ Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name
 Route::get('factures/{id}/preview', [FactureController::class, 'preview'])->name('factures.preview');
 Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name('factures.downloadPDF');
 
+
+Route::get('bons/{id}', [BonDachatController::class, 'show'])->name('bons.show');
+Route::get('bons/{id}/pdf', [BonDachatController::class, 'generatePDF'])->name('bons.downloadPDF');
+
+

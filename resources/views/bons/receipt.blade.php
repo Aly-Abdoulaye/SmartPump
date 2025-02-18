@@ -1,12 +1,39 @@
-@extends('Layouts.master')
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Reçu Bon d'Achat</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #fff; }
+        .container { width: 350px; margin: auto; padding: 20px; border: 2px solid black; border-radius: 10px; }
+        .header img { max-width: 80px; }
+        .header h2 { font-size: 18px; text-transform: uppercase; margin-bottom: 5px; }
+        .header p { font-size: 14px; color: gray; margin-top: 0; }
+        table { width: 100%; font-size: 14px; margin-top: 10px; border-collapse: collapse; }
+        th, td { padding: 5px 10px; text-align: left; }
+        th { background: #ddd; border-bottom: 1px solid black; }
+        .total { font-weight: bold; font-size: 16px; color: red; }
+        .status {
+            padding: 5px 10px;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        .bg-success { background: #28a745; }
+        .bg-warning { background: #ffc107; color: black; }
+        .bg-danger { background: #dc3545; }
+        .footer { font-size: 12px; color: gray; margin-top: 10px; }
+        hr { border-top: 1px dashed gray; }
+    </style>
+</head>
+<body>
 
-@section('content')
-<div class="container d-flex justify-content-center">
-    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 10px; background: #fff; font-family: Arial, sans-serif;">
-        <div class="text-center">
-            <img src="{{ asset('img/logo.png') }}" alt="Logo" style="max-width: 80px;">
-            <h4 class="mt-2" style="text-transform: uppercase;">SMART_PUMP</h4>
-            <p style="font-size: 14px; color: gray;">Reçu officiel</p>
+    <div class="container">
+        <div class="header">
+            <img src="{{ public_path('img/logo.png') }}" alt="Logo">
+            <h2>SMART_PUMP</h2>
+            <p>Reçu officiel</p>
         </div>
 
         <hr style="border-top: 2px dashed gray;">
@@ -72,13 +99,7 @@
         </div>
 
         <hr style="border-top: 1px solid black;">
-
-        <div class="text-center mt-4">
-            <a href="{{ route('bons.index') }}" class="btn btn-outline-secondary btn-sm">Retour</a>
-            <a href="{{ route('bons.downloadPDF', $bon->id) }}" class="btn btn-success btn-sm">
-                Télécharger en PDF <i class="fas fa-download"></i>
-            </a>
-        </div>
     </div>
-</div>
-@endsection
+
+</body>
+</html>
