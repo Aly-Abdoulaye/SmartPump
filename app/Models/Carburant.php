@@ -15,4 +15,9 @@ class Carburant extends Model
     {
         return $this->hasMany(BonDachat::class, 'carburant_id');
     }
+    public function cuves()
+    {
+        return $this->hasMany(Cuve::class);
+    }
+
 }
