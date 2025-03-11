@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container d-flex justify-content-center">
-    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 10px; background: #fff; font-family: Arial, sans-serif;">
+    <div class="card shadow-lg p-4" style="max-width: 550px; width: 100%; border-radius: 10px; background: #fff; font-family: Arial, sans-serif;">
         <div class="text-center">
             <img src="{{ asset('img/logo.png') }}" alt="Logo" style="max-width: 80px;">
             <h4 class="mt-2" style="text-transform: uppercase;">SMART_PUMP</h4>
