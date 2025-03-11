@@ -5,7 +5,8 @@ Use App\Http\controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
-
+use App\Http\Controllers\StationController;
+use App\Http\Controllers\CuveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,18 @@ Route::get('factures/{id}/pdf', [FactureController::class, 'generatePDF'])->name
 
 Route::get('bons/{id}', [BonDachatController::class, 'show'])->name('bons.show');
 Route::get('bons/{id}/pdf', [BonDachatController::class, 'generatePDF'])->name('bons.downloadPDF');
+
+//Ressources stations
+
+
+// Ressource complète pour les stations (index, create, store, edit, update, destroy)
+Route::resource('stations', StationController::class);
+
+
+
+
+
+
+
 
 
