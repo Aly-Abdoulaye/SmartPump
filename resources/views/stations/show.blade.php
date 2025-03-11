@@ -2,14 +2,12 @@
 
 @section('content')
 <div class="container">
-<div class="col-md-8">
-    <h3 class="section-header">Détails de la station : {{ $station->nom }}</h3>
-    <h4>Code Station : {{ $station->code_station }}</h4>
-</div>
-    
+    <div class="col-md-8">
+        <h3 class="section-header">Détails de la station : {{ $station->nom }}</h3>
+        <h4>Code Station : {{ $station->code_station }}</h4>
+    </div>
 
     <div class="row mt-3">
-
         <!-- Carte Infos Générales -->
         <div class="col-md-6">
             <div class="card">
@@ -17,7 +15,7 @@
                 <div class="card-body">
                     <p><strong>Nom :</strong> {{ $station->nom }}</p>
                     <p><strong>Localisation :</strong> {{ $station->localisation }}</p>
-                    <p><strong>Gérant :</strong> {{ $station->gerant->name ?? 'Non affecté' }}</p>
+                    <p><strong>Gérant :</strong> {{ $station->user ? $station->user->name : 'Aucun gérant' }}</p>
                 </div>
             </div>
         </div>
@@ -45,7 +43,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Stocks Actuels par Carburant -->
@@ -95,6 +92,5 @@
         <a href="{{ route('stations.index') }}" class="btn btn-secondary">Retour</a>
         <a href="#" class="btn btn-info">Voir Rapport</a>
     </div>
-
 </div>
 @endsection

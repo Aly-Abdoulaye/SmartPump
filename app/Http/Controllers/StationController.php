@@ -18,12 +18,13 @@ class StationController extends Controller
         return view('stations.index', compact('stations'));
     }
     public function store(Request $request)
-    {
+{
     // Validation des données
     $request->validate([
         'nom' => 'required|string|max:255',
         'localisation' => 'required|string|max:255',
         'status' => 'required|in:active,inactive,maintenance',
+        'gerant_id' => 'nullable|exists:users,id', // Ajoutez cette ligne pour valider gerant_id
     ]);
 
     // Création de la station
@@ -31,17 +32,17 @@ class StationController extends Controller
         'nom' => $request->nom,
         'localisation' => $request->localisation,
         'status' => $request->status,
-        'gerant_id' => null, // En attendant que la gestion des utilisateurs soit prête
+        'id_user' => $request->gerant_id, // Utilisez gerant_id ici
     ]);
 
     // Redirection vers la page index des stations avec un message de succès
     return redirect()->route('stations.index')->with('success', 'Station créée avec succès');
-    }
+}
     public function create()
-    {
-        $users = User::where('role', 'gerant')->get(); // Si tu veux lister les gérants
-        return view('Stations.create', compact('users'));
-    }
+{
+    $users = User::where('role', 'manager')->get(); // Filtrer les utilisateurs par rôle 'manager'
+    return view('stations.create', compact('users'));
+}
     public function edit($id)
     {
         $station = Station::findOrFail($id);
@@ -56,11 +57,11 @@ class StationController extends Controller
             'nom' => 'required|string|max:255',
             'localisation' => 'required|string|max:255',
             'status' => 'required|in:active,inactive,maintenance',
-            'gerant_id' => 'nullable|exists:users,id',
+            'id_user' => 'nullable|exists:users,id',
         ]);
 
         $station = Station::findOrFail($id);
-        $station->update($request->only(['nom', 'localisation', 'status', 'gerant_id']));
+        $station->update($request->only(['nom', 'localisation', 'status', 'id_user']));
 
         return redirect()->route('stations.index')->with('success', 'Station mise à jour avec succès');
     }
@@ -74,7 +75,7 @@ class StationController extends Controller
     }
     public function show($id)
     {
-        $station = Station::with(['gerant', 'cuves.carburant', 'pompes', 'depenses'])->findOrFail($id);
+        $station = Station::with(['user', 'cuves.carburant', 'pompes', 'depenses'])->findOrFail($id);
 
         // Exemple de récupération des ventes par type de carburant (tu adapteras selon ta structure de tables ventes)
         $ventesParCarburant = [];

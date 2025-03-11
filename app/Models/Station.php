@@ -14,7 +14,7 @@ class Station extends Model
         'localisation',
         'code_station',
         'status',       // au lieu de "etat"
-        'gerant_id',    // au lieu de "id_user"
+        'id_user',    // au lieu de "id_user"
     ];
 
     // Génération automatique du code station lors de la création
@@ -54,9 +54,9 @@ class Station extends Model
     }
 
     // Relation : Une station a un seul gérant
-    public function gerant()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'gerant_id');
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     // Relation : Une station a plusieurs dépenses
