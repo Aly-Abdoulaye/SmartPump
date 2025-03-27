@@ -39,7 +39,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr  class="text-center">
-                    <th>#</th>
                     <th>Nom</th>
                     <th>Localisation</th>
                     <th>Code</th>
@@ -50,7 +49,6 @@
             <tbody>
                 @foreach ($stations as $station)
                     <tr>
-                        <td class="text-center">{{ $station->id }}</td>
                         <td class="text-center">{{ $station->nom }}</td>
                         <td class="text-center">{{ $station->localisation }}</td>
                         <td class="text-center">{{ $station->code_station }}</td>

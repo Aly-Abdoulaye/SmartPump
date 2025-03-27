@@ -46,7 +46,7 @@ class StationController extends Controller
     public function edit($id)
     {
         $station = Station::findOrFail($id);
-        $users = User::where('role', 'gerant')->get(); // Si tu veux changer le gérant
+        $users = User::where('role', 'manager')->get(); // Si tu veux changer le gérant
 
         return view('stations.edit', compact('station', 'users'));
     }

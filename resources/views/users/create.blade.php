@@ -36,7 +36,7 @@
             <select name="station_id" id="station_id" class="form-select">
                 <option value="" selected>Aucune station</option>
                 @foreach ($stations as $station)
-                    <option value="{{ $station->id }}">{{ $station->name }}</option>
+                    <option value="{{ $station->id }}">{{ $station->nom }}</option>
                 @endforeach
             </select>
         </div>

@@ -33,7 +33,7 @@
                 <option value="" {{ is_null($user->station_id) ? 'selected' : '' }}>Aucune station</option>
                 @foreach ($stations as $station)
                     <option value="{{ $station->id }}" {{ $user->station_id == $station->id ? 'selected' : '' }}>
-                        {{ $station->name }}
+                        {{ $station->nom }}
                     </option>
                 @endforeach
             </select>
