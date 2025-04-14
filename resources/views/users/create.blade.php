@@ -31,7 +31,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="station_id" class="form-label">Station (optionnel)</label>
             <select name="station_id" id="station_id" class="form-select">
                 <option value="" selected>Aucune station</option>
@@ -39,7 +39,7 @@
                     <option value="{{ $station->id }}">{{ $station->nom }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Annuler</a>
