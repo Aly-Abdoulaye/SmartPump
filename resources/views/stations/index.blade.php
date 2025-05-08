@@ -32,16 +32,16 @@
         <div class="table-responsive">
     @if ($stations->isEmpty())
         <div class="alert alert-info mt-3">
-            Aucune station n'est disponible pour le moment. 
+            Aucune station n'est disponible pour le moment.
             <a href="{{ route('stations.create') }}" class="alert-link">Ajoutez-en une maintenant</a>.
-        </div> 
+        </div>
     @else
         <table class="table table-bordered">
             <thead>
                 <tr  class="text-center">
                     <th>Nom</th>
                     <th>Localisation</th>
-                    <th>Code</th>
+                    <th>Code_Station</th>
                     <th>État</th>
                     <th>Actions</th>
                 </tr>
