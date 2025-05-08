@@ -13,7 +13,7 @@ class CreateStationsTable extends Migration
             $table->string('nom');
             $table->string('localisation');
             $table->string('code_station')->unique();
-            $table->foreignId('gerant_id')->nullable(); // On attend la table users
+            $table->foreignId('id_user')->nullable(); // On attend la table users
             $table->enum('status', ['active', 'inactive', 'maintenance'])->default('active');
             $table->timestamps();
         });        
