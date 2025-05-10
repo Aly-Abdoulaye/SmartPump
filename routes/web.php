@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\CuveController;
+use App\Http\Controllers\CompagniesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,16 @@ Route::get('bons/{id}/pdf', [BonDachatController::class, 'generatePDF'])->name('
 
 // Ressource complète pour les stations (index, create, store, edit, update, destroy)
 Route::resource('stations', StationController::class);
+
+// Route pour afficher le formulaire de création d'une compagnie
+Route::get('/compagnies', [CompagniesController::class, 'index'])->name('compagnie.index');
+Route::get('/compagnies/create', [CompagniesController::class, 'create'])->name('compagnie.create');
+Route::post('/compagnies', [CompagniesController::class, 'store'])->name('compagnie.store');
+Route::get('/compagnies/{compagnie}/edit', [CompagniesController::class, 'edit'])->name('compagnie.edit');
+Route::put('/compagnies/{compagnie}', [CompagniesController::class, 'update'])->name('compagnie.update');
+Route::delete('/compagnies/{compagnie}', [CompagniesController::class, 'destroy'])->name('compagnie.destroy');
+Route::get('/compagnies/{id}', [CompagniesController::class, 'show'])->name('compagnie.show');
+
 
 
 

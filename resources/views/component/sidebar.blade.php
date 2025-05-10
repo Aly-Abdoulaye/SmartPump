@@ -23,6 +23,21 @@
                     <span>Tableau de bord </span>
                 </a>
             </li>
+            <!-- Nav Item - Compagnies --> 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <img src="{{ asset('img/icons/compagnie.png') }}" alt="">
+                    <span>Compagnies</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class=" py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestion des compagnies</h6>
+                        <a class="collapse-item" href="{{ route('compagnie.create') }}">Ajouter compagnie</a>
+                        <a class="collapse-item" href="{{ route('compagnie.index') }}">Listes de compagnies</a>
+                    </div>
+                </div>
 
             <!-- Nav Item - stations -->
             <li class="nav-item">

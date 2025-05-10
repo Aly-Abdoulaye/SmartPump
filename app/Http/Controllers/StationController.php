@@ -17,27 +17,43 @@ class StationController extends Controller
         $stations = Station::all();
         return view('stations.index', compact('stations'));
     }
-    public function store(Request $request)
+ public function store(Request $request)
 {
-    // Validation des données
+    // Vérifie que l'utilisateur est un admin
+    if (Auth::user()->role !== 'admin') {
+        abort(403, 'Seuls les administrateurs peuvent créer des stations.');
+    }
+
     $request->validate([
         'nom' => 'required|string|max:255',
         'localisation' => 'required|string|max:255',
         'status' => 'required|in:active,inactive,maintenance',
-        'gerant_id' => 'nullable|exists:users,id', // Ajoutez cette ligne pour valider gerant_id
+        'gerant_name' => 'required|string|max:255',
+        'gerant_email' => 'required|email|unique:users,email',
+        'gerant_password' => 'required|string|min:6|confirmed',
     ]);
 
-    // Création de la station
-    $station = Station::create([
+    // Création du gérant rattaché à la même compagnie que l'admin
+    $gerant = User::create([
+        'name' => $request->gerant_name,
+        'email' => $request->gerant_email,
+        'password' => Hash::make($request->gerant_password),
+        'role' => 'manager',
+        'compagnie_id' => Auth::user()->compagnie_id,
+    ]);
+
+    // Création de la station rattachée à la même compagnie
+    Station::create([
         'nom' => $request->nom,
         'localisation' => $request->localisation,
         'status' => $request->status,
-        'id_user' => $request->gerant_id, // Utilisez gerant_id ici
+        'compagnie_id' => Auth::user()->compagnie_id,
+        'gerant_id' => $gerant->id,
     ]);
 
-    // Redirection vers la page index des stations avec un message de succès
-    return redirect()->route('stations.index')->with('success', 'Station créée avec succès');
+    return redirect()->route('stations.index')->with('success', 'Station et gérant créés avec succès.');
 }
+
     public function create()
 {
     $users = User::where('role', 'manager')->get(); // Filtrer les utilisateurs par rôle 'manager'

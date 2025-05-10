@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Station::class);
     }
+    public function compagnie()
+    {
+        return $this->belongsTo(Compagnie::class);
+    }
+
 }

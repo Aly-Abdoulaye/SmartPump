@@ -16,8 +16,9 @@ return new class extends Migration
         $table->string('name');
         $table->string('email')->unique();
         $table->string('password');
-        $table->enum('role', ['admin', 'manager', 'employee', 'technician']);
+        $table->enum('role', ['superadmin','admin', 'manager', 'employee', 'technician']);
         $table->unsignedBigInteger('station_id')->nullable(); // FK pour les gérants et employés
+        $table->foreignId('id_compagnies')->nullable()->constrained()->onDelete('set null');
         $table->foreign('station_id')->references('id')->on('stations')->onDelete('set null');
         $table->timestamps();
     });
